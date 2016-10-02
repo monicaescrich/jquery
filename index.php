@@ -2,6 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>jQuery Mobile: Theme Download</title>
 	<link rel="stylesheet" href="themes/green_theme.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
@@ -16,12 +17,12 @@
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h3>Iniciar Sesion</h3>
-            <label for="txt-email" id="usuario">Usuario</label>
-            <input type="text" name="txt-email" id="txt-email" value="">
+            <label for="txt-email" >Usuario</label>
+            <input type="text"  id="usuario" >
             <label for="txt-password">Contra</label>
-            <input type="password" name="txt-password" id="pass" value="">
+            <input type="password"  id="pass" >
             
-            <a href="#ListaProducts"  id="btnlogin" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Iniciar Sesion</a>
+            <a   id="btnlogin" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Iniciar Sesion</a>
             
             <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
                 <div role="main" class="ui-content">
@@ -39,13 +40,17 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#ListaProducts">Productos</a></li>
+                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
-        <div role="main" class="ui-content" id="product">
+        <div role="main" class="ui-content" id="Prods">
+
+            <ul data-role='listview' data-filter='true' data-filter-placeholder='Buscar Productos' data-inset='true' id='product' class='ui-header ui-bar-inherit'>
+            </ul>
+
            <!-- <ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar Productos" data-inset="true" >
                
                 <li><a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop">
@@ -59,15 +64,15 @@
                 <p>Hot Chip</p></a>
                 </li>
                 <li><a href="#">
-                    <img src="../_assets/img/album-p.jpg">
+                    
                 <h2>Wolfgang Amadeus Phoenix</h2>
                 <p>Phoenix</p></a>
                 </li>
                 
             </ul> -->
         </div><!-- /content -->
-
-    <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">    
+    
+    <!-- <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">    
     <form>
         <div style="padding:10px 20px;" id="productespecifico">
             <h3>Producto</h3>
@@ -77,8 +82,31 @@
             <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-shop">Añadir a carrito</button>
         </div>
     </form>
-    	</div>
-	</div>
+    	</div> -->
+	
+     </div><!-- /page -->
+
+    <div data-role="page" id="contacto">
+        <div data-role="header" style="overflow:hidden;">
+        <h1>TecnoVentas</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
+                <li><a href="#carrito">Carrito</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div><!-- /navbar -->
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+           <label for="textinput-hide" >Correo electronico:</label>
+            <input type="text" name="textinput-hide" id="textinput-hide" placeholder="ejemplo@gmail.com" >
+            <label for="textarea">Cuentanos tu duda o sugerencia:</label>
+            <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+            </br>
+            <a href="#" class="ui-btn">Enviar!</a>
+        </div><!-- /content -->
+
+    
     </div><!-- /page -->
 
     <div data-role="page" id="carrito">
@@ -86,7 +114,7 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#ListaProducts" onClick="ver_carrito();">Productos</a></li>
+                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -105,7 +133,6 @@
                 <p>Hot Chip</p>
                 </li>
                 <li>
-                    <img src="../_assets/img/album-p.jpg">
                 <h2>Wolfgang Amadeus Phoenix</h2>
                 <p>Phoenix</p>
                 </li>
@@ -113,14 +140,13 @@
         </div><!-- /content -->
 
     
-	</div>
     </div><!-- /page -->
 
     <script>
 		function verificar_login()
 		{
 			var resultado="";
-			$.blockUI({ 
+			/*$.blockUI({ 
 				message: '<center><img src="dist/images/loading.GIF" width="50px"  height="50px"><br><h4>Iniciando sesi&oacute;n . . .</h4></center>',
 				css: { 
 					border: "none", 
@@ -128,7 +154,7 @@
 					backgroundColor: "none", 										
 					color: "#fff"
 				} 
-			});
+			});*/
 			$.get("http://pymesv.com/cliente02w/API/login/", { user: $("#usuario").val(), pass: $("#pass").val() })
 			.done(function( jsonws ) {				
 				$.each(jsonws ,function(indice, valor){
@@ -143,25 +169,25 @@
 				})	
 				if(resultado=="0")
 				{
-					$.unblockUI();
-					toastr.options = {
+					/*$.unblockUI();*/
+					/*toastr.options = {
 						"positionClass": "toast-bottom-right"
-					}
+					}*/
 					window.location.href="#dlg-invalid-credentials";
 				}
 				else
 				{
-					window.location.href="#ListaProducts"+resultado;		
+					window.location.href="#ListaProducts?"+resultado;		
 				}								
 			});				
 		}
 		$("#btnlogin").click(function(){
 			if($("#usuario").val() == "" || $("#pass").val() =="")
 			{
-				toastr.options = {
+				/*toastr.options = {
 					"positionClass": "toast-bottom-right"
 				}
-				toastr.error("<h5>CAMPOS VACIOS. . .</h5>");
+				toastr.error("<h5>CAMPOS VACIOS. . .</h5>");*/
 			}
 			else
 			{
@@ -184,6 +210,56 @@
 					html=html+"</ul>";
 					$("#product").append(html);
 			}
+
+            function obtener_productos()
+            {
+                $("#areaproductos").html("");
+                /*$.blockUI({ 
+                    message: '<center><img src="../dist/images/loading.GIF" width="50px"  height="50px"><br><h4>Obteniendo informaci&oacute;n . . .</h4></center>',
+                    css: { 
+                        border: "none", 
+                        padding: "8px", 
+                        backgroundColor: "none",                                        
+                        color: "#fff"
+                    } 
+                });*/
+                //OBTENIENDO INFORMACION DE WS
+                $.get("http://pymesv.com/cliente02w/API/TODOS/")
+                .done(function(jsonws){                                     
+                    $.each(jsonws ,function(indice,valor){
+                        if(indice=="error" && valor=="0")
+                        {
+                            /*toastr.options = {
+                                "positionClass": "toast-bottom-right"
+                            }
+                            toastr.error("<h6>:( ERROR DESCONOCIDO. . .</h6>");*/
+                        }
+                        else if(indice=="error" && valor=="1")
+                        {
+                            /*toastr.options = {
+                                "positionClass": "toast-bottom-right"
+                            }
+                            toastr.error("<h6>:( NO SE ENCUENTRA PRODUCTOS. . .</h6>");
+                            var html="<br><br><br><center><img src='../dist/images/notfound.png' width='60' height='60'><h5>No existen productos registrados. . .</h5></center>";
+                            $("#areaproductos").append(html);*/
+                        }
+                        else
+                        {   $("#product").append("");
+                            var html=""; 
+                            html="<li class='ui-li-has-thumb'><a href='#"+valor.idproductos+"' data-rel='popup' data-position-to='window' data-transition='pop'><img src='"+valor.url+"' width='40' height='40'><h3>"+valor.nombre+"</h3><h2>$"+valor.precio+"</h2></li>";                  
+                           
+                            $("#product").append(html);
+
+                            $("#Prods").append("");
+                            var html2=""; 
+                            html2=" <div data-role='popup' id='"+valor.idproductos+"' data-theme='a' class='ui-corner-all'><form><div style='padding:10px 20px;'><h3>"+valor.nombre+"</h3><img src='"+valor.url+"' style='width:50%; height:50%;' ><center>"+valor.descripcion+"</center><input type='text' name='user' id='cantidad_"+valor.idproducto+"'  placeholder='Cantidad' data-theme='a'> <button type='submit' id='btn_"+valor.idproductos+"' class='ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-shop'>Añadir a carrito</button></div></form></div></div>";
+                            $("#Prods").append(html2);
+                            
+                        }
+                    })/*
+                    $.unblockUI();*/
+                });
+            }
 		</script>
 </body>
 </html>
