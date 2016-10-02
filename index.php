@@ -38,11 +38,18 @@
     <div data-role="page" id="ListaProducts">
         <div data-role="header" style="overflow:hidden;">
         <h1>TecnoVentas</h1>
-        <div data-role="navbar">
+        <div data-role="navbar" data-iconpos="left">
             <ul>
+<<<<<<< HEAD
+                <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#contacto" data-icon="mail">Contacto</a></li>
+                <li><a href="#contacto" data-icon="clock">Comprados </a></li>
+=======
                 <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+>>>>>>> origin/Initial_Pages
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
@@ -91,7 +98,11 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
+<<<<<<< HEAD
+                <li><a href="#ListaProducts" >Productos</a></li>
+=======
                 <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
+>>>>>>> origin/Initial_Pages
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -114,7 +125,11 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
+<<<<<<< HEAD
+                <li><a href="#ListaProducts" >Productos</a></li>
+=======
                 <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
+>>>>>>> origin/Initial_Pages
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -208,9 +223,14 @@
 						html=html+"<li><a href='#popupLogin' data-rel='popup' data-position-to='window' data-transition='pop'><img src='"+valor.url+"' width='40' height='40'><<h3>"+valor.nombre+"</h3><h2>$"+valor.precio+"</h2></li>";					
 					});
 					html=html+"</ul>";
-					$("#product").append(html);
+					$("#product").html(html);
 			}
 
+<<<<<<< HEAD
+            $(document).ready(obtener_productos);
+
+=======
+>>>>>>> origin/Initial_Pages
             function obtener_productos()
             {
                 $("#areaproductos").html("");
