@@ -40,16 +40,10 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar" data-iconpos="left">
             <ul>
-<<<<<<< HEAD
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
                 <li><a href="#carrito" data-icon="shop">Carrito</a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
                 <li><a href="#contacto" data-icon="clock">Comprados </a></li>
-=======
-                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
-                <li><a href="#carrito">Carrito</a></li>
-                <li><a href="#contacto">Contacto</a></li>
->>>>>>> origin/Initial_Pages
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
@@ -98,11 +92,7 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-<<<<<<< HEAD
                 <li><a href="#ListaProducts" >Productos</a></li>
-=======
-                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
->>>>>>> origin/Initial_Pages
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -125,11 +115,7 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-<<<<<<< HEAD
                 <li><a href="#ListaProducts" >Productos</a></li>
-=======
-                <li><a href="#ListaProducts" onClick="obtener_productos();">Productos</a></li>
->>>>>>> origin/Initial_Pages
                 <li><a href="#carrito">Carrito</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -226,11 +212,8 @@
 					$("#product").html(html);
 			}
 
-<<<<<<< HEAD
             $(document).ready(obtener_productos);
 
-=======
->>>>>>> origin/Initial_Pages
             function obtener_productos()
             {
                 $("#areaproductos").html("");
