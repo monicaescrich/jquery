@@ -38,12 +38,12 @@
     <div data-role="page" id="ListaProducts">
         <div data-role="header" style="overflow:hidden;">
         <h1>TecnoVentas</h1>
-        <div data-role="navbar" data-iconpos="left">
+        <div data-role="navbar" >
             <ul>
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
                 <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
-                <li><a href="#contacto" data-icon="clock">Comprados </a></li>
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
@@ -92,9 +92,10 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#ListaProducts" >Productos</a></li>
-                <li><a href="#carrito">Carrito</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
+                <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
@@ -115,9 +116,10 @@
         <h1>TecnoVentas</h1>
         <div data-role="navbar">
             <ul>
-                <li><a href="#ListaProducts" >Productos</a></li>
-                <li><a href="#carrito">Carrito</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
+                <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
         </div><!-- /navbar -->
         </div><!-- /header -->
@@ -143,19 +145,44 @@
     
     </div><!-- /page -->
 
+    <div data-role="page" id="comprados">
+        <div data-role="header" style="overflow:hidden;">
+        <h1>TecnoVentas</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
+                <li><a href="#contacto" data-icon="mail">Contacto</a></li>
+            </ul>
+        </div><!-- /navbar -->
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+           <ul data-role='listview' data-filter='true' data-filter-placeholder='Buscar Productos' data-inset='true' id='compradoslista' class='ui-header ui-bar-inherit'>
+                <li>
+                <img src="imagenes/deee.jpg">
+                <h2>Broken Bells</h2>
+                <p>Broken Bells</p>
+                </li>
+                <li>
+                    <img src="imagenes/yoyo.jpg">
+                <h2>Warning</h2>
+                <p>Hot Chip</p>
+                </li>
+                <li>
+                <h2>Wolfgang Amadeus Phoenix</h2>
+                <p>Phoenix</p>
+                </li>
+            </ul>
+        </div><!-- /content -->
+
+    
+    </div><!-- /page -->
+
     <script>
 		function verificar_login()
 		{
 			var resultado="";
-			/*$.blockUI({ 
-				message: '<center><img src="dist/images/loading.GIF" width="50px"  height="50px"><br><h4>Iniciando sesi&oacute;n . . .</h4></center>',
-				css: { 
-					border: "none", 
-					padding: "8px", 
-					backgroundColor: "none", 										
-					color: "#fff"
-				} 
-			});*/
 			$.get("http://pymesv.com/cliente02w/API/login/", { user: $("#usuario").val(), pass: $("#pass").val() })
 			.done(function( jsonws ) {				
 				$.each(jsonws ,function(indice, valor){
@@ -170,10 +197,6 @@
 				})	
 				if(resultado=="0")
 				{
-					/*$.unblockUI();*/
-					/*toastr.options = {
-						"positionClass": "toast-bottom-right"
-					}*/
 					window.location.href="#dlg-invalid-credentials";
 				}
 				else
@@ -185,10 +208,7 @@
 		$("#btnlogin").click(function(){
 			if($("#usuario").val() == "" || $("#pass").val() =="")
 			{
-				/*toastr.options = {
-					"positionClass": "toast-bottom-right"
-				}
-				toastr.error("<h5>CAMPOS VACIOS. . .</h5>");*/
+				
 			}
 			else
 			{
@@ -217,34 +237,18 @@
             function obtener_productos()
             {
                 $("#areaproductos").html("");
-                /*$.blockUI({ 
-                    message: '<center><img src="../dist/images/loading.GIF" width="50px"  height="50px"><br><h4>Obteniendo informaci&oacute;n . . .</h4></center>',
-                    css: { 
-                        border: "none", 
-                        padding: "8px", 
-                        backgroundColor: "none",                                        
-                        color: "#fff"
-                    } 
-                });*/
+                
                 //OBTENIENDO INFORMACION DE WS
                 $.get("http://pymesv.com/cliente02w/API/TODOS/")
                 .done(function(jsonws){                                     
                     $.each(jsonws ,function(indice,valor){
                         if(indice=="error" && valor=="0")
                         {
-                            /*toastr.options = {
-                                "positionClass": "toast-bottom-right"
-                            }
-                            toastr.error("<h6>:( ERROR DESCONOCIDO. . .</h6>");*/
+                            
                         }
                         else if(indice=="error" && valor=="1")
                         {
-                            /*toastr.options = {
-                                "positionClass": "toast-bottom-right"
-                            }
-                            toastr.error("<h6>:( NO SE ENCUENTRA PRODUCTOS. . .</h6>");
-                            var html="<br><br><br><center><img src='../dist/images/notfound.png' width='60' height='60'><h5>No existen productos registrados. . .</h5></center>";
-                            $("#areaproductos").append(html);*/
+                           
                         }
                         else
                         {   $("#product").append("");
@@ -259,9 +263,37 @@
                             $("#Prods").append(html2);
                             
                         }
-                    })/*
-                    $.unblockUI();*/
+                    })
                 });
+            }
+
+                var idcliente=1;
+      
+      //CARRITOS HISTORICOS DE COMPRAS
+            function obtener_historico()
+            {
+                
+                    $("#compradoslista").html("");               
+                    $.get("http://pymesv.com/cliente02w/API/mostrarcarrito/", { idclientes: idcliente})
+                    .done(function(jsonws){ 
+                        var html;
+                        $.each(jsonws ,function(indice,valor){
+                         html =html+"<li><img src='"+valor.url+"'' width='50%' height='50%' ><h2>"+valor.nombre+"</h2><p>cantidad: "+valor.cantidad+"</p><h3>$"+valor.subtot+"</h3><p>"+valor.fecha+"</p></li>";
+             })
+                        
+                        $("#compradoslista").html(html);
+                    });         
+                                
+            }
+            //AGREGAR PARCIALMENTE AL CARRITO
+            function agregar_carrito(cliente,idproducto,nombre,precio,imagen)
+            {               
+                var nuevo;
+                nuevo={"idcliente":cliente,"idproductos":idproducto,"nombre":nombre,"precio":precio,"url":imagen};
+                carrito.push(nuevo);
+                cantidad=carrito.length;
+                $("#contadorproductos").html(cantidad).fadeIn();
+                
             }
 		</script>
 </body>
