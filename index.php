@@ -41,7 +41,7 @@
         <div data-role="navbar" >
             <ul>
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
-                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito<span class="ui-li-count" id="contadorproductos1">0</span></a></li>
                 <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
@@ -93,7 +93,7 @@
         <div data-role="navbar">
             <ul>
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
-                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito<span class="ui-li-count" id="contadorproductos">0</span></a></li>
                 <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
@@ -117,7 +117,7 @@
         <div data-role="navbar">
             <ul>
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
-                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito<span class="ui-li-count" id="contadorproductos2">0</span></a></li>
                 <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
@@ -151,7 +151,7 @@
         <div data-role="navbar">
             <ul>
                 <li><a href="#ListaProducts" data-icon="bars">Productos</a></li>
-                <li><a href="#carrito" data-icon="shop">Carrito</a></li>
+                <li><a href="#carrito" data-icon="shop">Carrito<span class="ui-li-count" id="contadorproductos3">0</span></a></li>
                 <li><a href="#comprados" onClick="obtener_historico();" data-icon="clock">Comprados </a></li>
                 <li><a href="#contacto" data-icon="mail">Contacto</a></li>
             </ul>
@@ -259,7 +259,7 @@
 
                             $("#Prods").append("");
                             var html2=""; 
-                            html2=" <div data-role='popup' id='"+valor.idproductos+"' data-theme='a' class='ui-corner-all'><form><div style='padding:10px 20px;'><h3>"+valor.nombre+"</h3><img src='"+valor.url+"' style='width:50%; height:50%;' ><center>"+valor.descripcion+"</center><input type='text' name='user' id='cantidad_"+valor.idproducto+"'  placeholder='Cantidad' data-theme='a'> <button type='submit' id='btn_"+valor.idproductos+"' class='ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-shop'>Añadir a carrito</button></div></form></div></div>";
+                            html2=" <div data-role='popup' id='"+valor.idproductos+"' data-theme='a' class='ui-corner-all'><form><div style='padding:10px 20px;'><h3>"+valor.nombre+"</h3><img src='"+valor.url+"' style='width:50%; height:50%;' ><center>"+valor.descripcion+"</center><input type='text' name='user' id='cantidad_"+valor.idproducto+"'  placeholder='Cantidad' data-theme='a'> <button type='submit' id='btn_"+valor.idproductos+"' class='ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-shop' onClick='agregar_carrito(idcliente,'"+valor.idproductos+"','"+valor.nombre+"','"+valor.precio+"','"+valor.url+"');'>Añadir a carrito</button></div></form></div></div>";
                             $("#Prods").append(html2);
                             
                         }
@@ -285,7 +285,10 @@
                     });         
                                 
             }
+
             //AGREGAR PARCIALMENTE AL CARRITO
+            var carrito=[];
+            var cantidad;
             function agregar_carrito(cliente,idproducto,nombre,precio,imagen)
             {               
                 var nuevo;
@@ -293,6 +296,9 @@
                 carrito.push(nuevo);
                 cantidad=carrito.length;
                 $("#contadorproductos").html(cantidad).fadeIn();
+                 $("#contadorproductos1").html(cantidad).fadeIn();
+                  $("#contadorproductos2").html(cantidad).fadeIn();
+                   $("#contadorproductos3").html(cantidad).fadeIn();
                 
             }
 		</script>
